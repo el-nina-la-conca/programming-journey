@@ -1,0 +1,17 @@
+D:\Yulmenina xpplg2\projek akhir_yulmenina\bin\Debug\net8.0-windows\projek akhir_yulmenina.exe
+D:\Yulmenina xpplg2\projek akhir_yulmenina\bin\Debug\net8.0-windows\projek akhir_yulmenina.deps.json
+D:\Yulmenina xpplg2\projek akhir_yulmenina\bin\Debug\net8.0-windows\projek akhir_yulmenina.runtimeconfig.json
+D:\Yulmenina xpplg2\projek akhir_yulmenina\bin\Debug\net8.0-windows\projek akhir_yulmenina.dll
+D:\Yulmenina xpplg2\projek akhir_yulmenina\bin\Debug\net8.0-windows\projek akhir_yulmenina.pdb
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek_akhir_yulmenina.Form1.resources
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek_akhir_yulmenina.Properties.Resources.resources
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.csproj.GenerateResource.cache
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.GeneratedMSBuildEditorConfig.editorconfig
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.AssemblyInfoInputs.cache
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.AssemblyInfo.cs
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.csproj.CoreCompileInputs.cache
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.dll
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\refint\projek akhir_yulmenina.dll
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.pdb
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\projek akhir_yulmenina.genruntimeconfig.cache
+D:\Yulmenina xpplg2\projek akhir_yulmenina\obj\Debug\net8.0-windows\ref\projek akhir_yulmenina.dll
