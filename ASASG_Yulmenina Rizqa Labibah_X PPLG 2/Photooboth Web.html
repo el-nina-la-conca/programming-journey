@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastel Snap Photobooth</title>
+    <link rel="stylesheet" href="CSS. Photoobooth.css">
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-particles" id="bgParticles"></div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><div class="logo-icon"><i class="fas fa-camera-retro"></i></div><h2>Cherie Cam by Q'l</h2></div>
+            <ul class="sidebar-menu">
+                <li class="active" data-page="lobby" onclick="navigateTo('lobby')"><i class="fas fa-home"></i><span>Home</span></li>
+                <li data-page="photobooth" onclick="navigateTo('photobooth')"><i class="fas fa-camera"></i><span>Photobooth</span></li>
+                <li data-page="gallery" onclick="navigateTo('gallery')"><i class="fas fa-images"></i><span>Gallery</span></li>
+            </ul>
+            <div class="sidebar-decor"><svg width="50" height="50" viewBox="0 0 100 100">
+                <ellipse cx="50" cy="65" rx="25" ry="28" fill="#FFD1DC"/>
+                <ellipse cx="38" cy="28" rx="10" ry="22" fill="#FFD1DC"/>
+                <ellipse cx="62" cy="28" rx="10" ry="22" fill="#FFD1DC"/>
+                <circle cx="42" cy="58" r="4" fill="#5C2D3E"/>
+                <circle cx="58" cy="58" r="4" fill="#5C2D3E"/></svg></div>
+        </aside>
+        <main class="main-content">
+            <nav class="top-nav">
+                <div class="top-nav-links"><a class="active" data-page="lobby" onclick="navigateTo('lobby')">Photobooth</a><a data-page="gallery" onclick="navigateTo('gallery')">Galeri</a></div>
+                <div class="top-nav-brand">Cherie Cam by Q'l</div>
+                <div class="top-nav-right"><button class="nav-icon-btn"><i class="fas fa-bell"></i></button><button class="nav-icon-btn"><i class="fas fa-cog"></i></button></div>
+            </nav>
+
+            <section class="page active" id="page-lobby"><div class="lobby-page">
+                <div class="floating-decor decor-cloud-1"><svg width="80" height="50" viewBox="0 0 80 50"><ellipse cx="40" cy="35" rx="35" ry="15" fill="#FFD1DC" opacity=".6"/><ellipse cx="28" cy="25" rx="18" ry="14" fill="#FFD1DC" opacity=".6"/></svg></div>
+                <div class="floating-decor decor-star-1"><svg width="30" height="30" viewBox="0 0 30 30"><polygon points="15,2 18,11 28,11 20,17 23,27 15,21 7,27 10,17 2,11 12,11" fill="#FFD700" opacity=".5"/></svg></div>
+                <div class="floating-decor decor-bunny"><svg width="55" height="55" viewBox="0 0 100 100"><ellipse cx="50" cy="65" rx="22" ry="25" fill="#FFD1DC"/><ellipse cx="40" cy="28" rx="9" ry="20" fill="#FFD1DC"/><ellipse cx="60" cy="28" rx="9" ry="20" fill="#FFD1DC"/>
+                    <circle cx="43" cy="58" r="3.5" fill="#5C2D3E"/><circle cx="57" cy="58" r="3.5" fill="#5C2D3E"/></svg></div>
+                <h1 class="lobby-title">CherieCam by Q'L Photobooth</h1>
+                <p class="lobby-subtitle">Cute moments, forever memories</p>
+                <div class="lobby-illustration"><div class="lobby-frame"><div class="lobby-frame-inner"><div class="camera-icon"><i class="fas fa-camera"></i></div><p>Let's capture your smile!</p></div></div></div>
+                <button class="btn-start" onclick="navigateTo('photobooth')">Start</button>
+                <div class="lobby-features">
+                    <div class="lobby-feature-item"><div class="feat-icon"><i class="fas fa-camera"></i></div><span>Good vibes</span></div>
+                    <div class="lobby-feature-item"><div class="feat-icon"><i class="fas fa-heart"></i></div><span>Cute frames</span></div>
+                    <div class="lobby-feature-item"><div class="feat-icon"><i class="fas fa-star"></i></div><span>Fun stickers</span></div>
+                    <div class="lobby-feature-item"><div class="feat-icon"><i class="fas fa-th"></i></div><span>Multi Layout</span></div>
+                </div>
+            </div></section>
+
+            <section class="page" id="page-photobooth"><div class="photobooth-page">
+                <div class="camera-area">
+                    <div class="camera-frame-wrapper">
+                        <div class="camera-frame" id="cameraFrame">
+                            <video id="cameraVideo" autoplay playsinline muted></video>
+                            <canvas id="captureCanvas" style="display:none;"></canvas>
+                            <div class="frame-preview-overlay" id="framePreviewOverlay"></div>
+                            <div class="frame-label" id="frameLabel">None</div>
+                            <div class="stickers-overlay" id="stickersOverlay"></div>
+                            <div class="sticker-counter" id="stickerCounter">0 stiker</div>
+                            <button class="btn-clear-stickers" id="btnClearStickers" onclick="clearAllStickers()">Hapus Semua</button>
+                            <div class="countdown-overlay" id="countdownOverlay"><span class="countdown-number" id="countdownNumber">3</span></div>
+                            <div class="flash-effect" id="flashEffect"></div>
+                        </div>
+                    </div>
+                    <div class="camera-controls">
+                        <button class="btn-ctrl" onclick="toggleCamera()"><i class="fas fa-sync-alt"></i></button>
+                        <button class="btn-capture" id="btnCapture" onclick="startCapture()"></button>
+                        <button class="btn-ctrl" onclick="startCapture()"><i class="fas fa-clock"></i></button>
+                    </div>
+                    <button class="btn-next" id="btnNext" onclick="navigateTo('result')">Lihat Hasil <i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="toolbar">
+                    <div class="toolbar-tabs">
+                        <button class="toolbar-tab active" data-tab="frames" onclick="switchToolbarTab('frames')"><i class="fas fa-border-all"></i> Frame</button>
+                        <button class="toolbar-tab" data-tab="stickers" onclick="switchToolbarTab('stickers')"><i class="fas fa-star"></i> Stiker</button>
+                        <button class="toolbar-tab" data-tab="filters" onclick="switchToolbarTab('filters')"><i class="fas fa-magic"></i> Filter</button>
+                        <button class="toolbar-tab" data-tab="layouts" onclick="switchToolbarTab('layouts')"><i class="fas fa-th"></i> Layout</button>
+                    </div>
+                    <div class="toolbar-content">
+                        <div class="toolbar-panel active" id="panel-frames"><div class="tool-grid">
+                            <div class="tool-item selected" onclick="selectFrame('none',this)"><i class="fas fa-ban" style="font-size:16px;color:#ccc"></i>
+                                <span class="tool-label">None</span></div>
+                            <div class="tool-item" onclick="selectFrame('pink',this)" style="border:3px solid #FF8FAB;background:#FFF0F5">
+                                <span class="tool-label">Pink</span></div>
+                            <div class="tool-item" onclick="selectFrame('purple',this)" style="border:3px solid #D8B4FE;background:#F3E8FF">
+                                <span class="tool-label">Dreamy</span></div>
+                            <div class="tool-item" onclick="selectFrame('dots',this)" style="background:radial-gradient(circle,#FF8FAB 1.5px,#FFF0F5 1.5px);background-size:6px 6px">
+                                <span class="tool-label">Dots</span></div>
+                            <div class="tool-item" onclick="selectFrame('gradient',this)" style="background:linear-gradient(135deg,#FF8FAB,#D8B4FE)">
+                                <span class="tool-label">Ombre</span></div>
+                            <div class="tool-item" onclick="selectFrame('classic',this)" style="border:3px double #FF8FAB;background:#FFF0F5">
+                                <span class="tool-label">Classic</span></div>
+                            <div class="tool-item" onclick="selectFrame('hearts',this)" style="border:3px solid #FF8FAB;background:#FFF0F5;box-shadow:inset 0 0 0 3px #FFD1DC,inset 0 0 0 5px #FF8FAB">
+                                <span class="tool-label">Hearts</span></div>
+                            <div class="tool-item" onclick="selectFrame('sparkle',this)" style="border:3px solid #FFD700;background:#FFFDF0;box-shadow:0 0 8px rgba(255,215,0,.3)">
+                                <span class="tool-label">Sparkle</span></div>
+                            <div class="tool-item" onclick="selectFrame('polaroid',this)" style="border:4px solid white;border-bottom:12px solid white;background:#eee">
+                                <span class="tool-label">Polaroid</span></div>
+                            <div class="tool-item" onclick="selectFrame('filmstrip',this)" style="border:5px solid #333;background:#222;border-radius:2px">
+                                <span class="tool-label" style="color:#999">Film</span></div>
+                            <div class="tool-item" onclick="selectFrame('lace',this)" style="border:3px dashed #FF8FAB;background:#FFF0F5;border-radius:6px">
+                                <span class="tool-label">Lace</span></div>
+                            <div class="tool-item" onclick="selectFrame('blueberry',this)" style="border:3px solid #4D96FF;background:#EAF4FF;border-radius:14px;">
+                                <span class="tool-label">Blueberry 🫐</span></div>
+                        </div></div>
+                        <div class="toolbar-panel" id="panel-stickers">
+                            <p style="font-size:10px;color:var(--text-muted);margin-bottom:8px;font-weight:600"><i class="fas fa-info-circle"></i> Klik utk tambah/hapus. Bisa >1!</p>
+                            <div class="tool-grid">
+                                <div class="tool-item" onclick="selectSticker('bunny',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100">
+                                        <ellipse cx="50" cy="65" rx="20" ry="22" fill="#FFD1DC"/><ellipse cx="40" cy="30" rx="8" ry="18" fill="#FFD1DC"/>
+                                        <ellipse cx="60" cy="30" rx="8" ry="18" fill="#FFD1DC"/><circle cx="43" cy="58" r="3" fill="#5C2D3E"/>
+                                        <circle cx="57" cy="58" r="3" fill="#5C2D3E"/></svg><span class="tool-label">Bunny</span></div>
+                                <div class="tool-item" onclick="selectSticker('bear',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100">
+                                        <circle cx="25" cy="25" r="12" fill="#D2A679"/><circle cx="75" cy="25" r="12" fill="#D2A679"/>
+                                        <circle cx="50" cy="55" r="28" fill="#D2A679"/><circle cx="40" cy="48" r="3.5" fill="#5C2D3E"/>
+                                        <circle cx="60" cy="48" r="3.5" fill="#5C2D3E"/></svg><span class="tool-label">Bear</span></div>
+                                <div class="tool-item" onclick="selectSticker('heart',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100"><path d="M50 85 C20 60 10 40 10 28 C10 15 20 8 32 8 C40 8 47 13 50 20 C53 13 60 8 68 8 C80 8 90 15 90 28 C90 40 80 60 50 85Z" fill="#FF8FAB"/></svg>
+                                    <span class="tool-label">Heart</span></div>
+                                <div class="tool-item" onclick="selectSticker('star',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100"><polygon points="50,5 61,35 95,35 68,57 79,90 50,70 21,90 32,57 5,35 39,35" fill="#FFD700"/></svg>
+                                    <span class="tool-label">Star</span></div>
+                                <div class="tool-item" onclick="selectSticker('cloud',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 70"><ellipse cx="50" cy="50" rx="40" ry="18" fill="#F3E8FF"/><ellipse cx="35" cy="35" rx="22" ry="18" fill="#F3E8FF"/>
+                                        <ellipse cx="65" cy="32" rx="25" ry="20" fill="#F3E8FF"/></svg>
+                                        <span class="tool-label">Cloud</span></div>
+                                <div class="tool-item" onclick="selectSticker('ribbon',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100"><circle cx="50" cy="40" r="12" fill="#FF8FAB"/>
+                                        <path d="M38,40 L20,25 L30,45 Z" fill="#FF8FAB"/><path d="M62,40 L80,25 L70,45 Z" fill="#FF8FAB"/>
+                                        <circle cx="50" cy="40" r="6" fill="#FFD1DC"/></svg><span class="tool-label">Ribbon</span></div>
+                                <div class="tool-item" onclick="selectSticker('flower',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100">
+                                        <circle cx="50" cy="30" r="14" fill="#FFB6C1"/><circle cx="30" cy="50" r="14" fill="#FFD1DC"/>
+                                        <circle cx="70" cy="50" r="14" fill="#FFD1DC"/><circle cx="38" cy="68" r="14" fill="#FFB6C1"/>
+                                        <circle cx="62" cy="68" r="14" fill="#FFB6C1"/><circle cx="50" cy="50" r="10" fill="#FFD700"/></svg>
+                                        <span class="tool-label">Flower</span></div>
+                                <div class="tool-item" onclick="selectSticker('crown',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100">
+                                        <polygon points="10,70 20,30 35,55 50,20 65,55 80,30 90,70" fill="#FFD700"/>
+                                        <rect x="10" y="70" width="80" height="15" rx="3" fill="#FFD700"/></svg>
+                                        <span class="tool-label">Crown</span></div>
+                                <div class="tool-item" onclick="selectSticker('moon',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100"><circle cx="45" cy="50" r="35" fill="#FFD700"/>
+                                        <circle cx="60" cy="40" r="28" fill="#1a1a2e"/></svg><span class="tool-label">Moon</span></div>
+                                <div class="tool-item" onclick="selectSticker('candy',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100">
+                                        <ellipse cx="50" cy="50" rx="22" ry="15" fill="#FF8FAB"/>
+                                        <path d="M28,50 Q10,40 15,30 Q20,45 28,50" fill="#FF8FAB"/>
+                                        <path d="M72,50 Q90,40 85,30 Q80,45 72,50" fill="#FF8FAB"/></svg>
+                                        <span class="tool-label">Candy</span></div>
+                                <div class="tool-item" onclick="selectSticker('cherry',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 100">
+                                        <circle cx="35" cy="70" r="16" fill="#E8607A"/>
+                                        <circle cx="65" cy="70" r="16" fill="#E8607A"/>
+                                        <path d="M35,55 Q40,20 50,15" fill="none" stroke="#4CAF50" stroke-width="3"/>
+                                        <path d="M65,55 Q60,20 50,15" fill="none" stroke="#4CAF50" stroke-width="3"/></svg>
+                                        <span class="tool-label">Cherry</span></div>
+                                <div class="tool-item" onclick="selectSticker('rainbow',this)">
+                                    <svg width="30" height="30" viewBox="0 0 100 70">
+                                        <path d="M10,60 A40,40 0 0,1 90,60" fill="none" stroke="#FF8FAB" stroke-width="6"/>
+                                        <path d="M18,60 A32,32 0 0,1 82,60" fill="none" stroke="#FFD700" stroke-width="6"/>
+                                        <path d="M26,60 A24,24 0 0,1 74,60" fill="none" stroke="#90EE90" stroke-width="6"/></svg>
+                                        <span class="tool-label">Rainbow</span></div>
+                            </div>
+                        </div>
+                        <div class="toolbar-panel" id="panel-filters"><div class="tool-grid">
+                            <div class="filter-item selected" onclick="selectFilter('none',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#FFD1DC,#F3E8FF)">
+                                <i class="fas fa-eye" style="font-size:14px;color:#5C2D3E"></i></div><span class="filter-name">Normal</span></div>
+                            <div class="filter-item" onclick="selectFilter('soft-pink',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#FFB6C1,#FFC0CB)">
+                                <i class="fas fa-cloud" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Strawberry milk</span></div>
+                            <div class="filter-item" onclick="selectFilter('warm',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#FFDAB9,#FFE4B5)">
+                                <i class="fas fa-sun" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Warm</span></div>
+                            <div class="filter-item" onclick="selectFilter('cool',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#B0C4DE,#ADD8E6)">
+                                <i class="fas fa-snowflake" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Chrisna</span></div>
+                            <div class="filter-item" onclick="selectFilter('vintage',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#D2B48C,#C4A882)">
+                                <i class="fas fa-film" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Vintage</span></div>
+                            <div class="filter-item" onclick="selectFilter('bw',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#888,#bbb)">
+                                <i class="fas fa-adjust" style="font-size:14px;color:#fff"></i></div><span class="filter-name">B&W</span></div>
+                            <div class="filter-item" onclick="selectFilter('rose',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#FF6B8A,#FF8E9E)">
+                                <i class="fas fa-spa" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Rose</span></div>
+                            <div class="filter-item" onclick="selectFilter('lavender',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#C8A2E8,#E8D5F5)">
+                                <i class="fas fa-leaf" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Lavender</span></div>
+                            <div class="filter-item" onclick="selectFilter('sunset',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#FF7E5F,#FEB47B)">
+                                <i class="fas fa-cloud-sun" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Sunset</span></div>
+                            <div class="filter-item" onclick="selectFilter('ocean',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#667EEA,#764BA2)">
+                                <i class="fas fa-water" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Ocean</span></div>
+                            <div class="filter-item" onclick="selectFilter('peach',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#FFDAB9,#FFB7C5)">
+                                <i class="fas fa-lemon" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Peach</span></div>
+                            <div class="filter-item" onclick="selectFilter('dreamy',this)"><div class="filter-preview" style="background:linear-gradient(135deg,#F5E6FF,#E0C3FC)">
+                                <i class="fas fa-moon" style="font-size:14px;color:#fff"></i></div><span class="filter-name">Dreamy</span></div>
+                        </div></div>
+                        <div class="toolbar-panel" id="panel-layouts">
+                            <p style="font-size:10px;color:var(--text-muted);margin-bottom:8px;font-weight:600"><i class="fas fa-info-circle"></i> Pilih jumlah & tata letak foto</p>
+                            <div class="tool-grid">
+                                <div class="tool-item" onclick="selectLayout('1', this)" style="background:white;">
+                                    <div style="width:70%;height:70%;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                    <span class="tool-label">1 Foto</span></div>
+                                <div class="tool-item" onclick="selectLayout('2', this)" style="background:white;">
+                                    <div style="display:flex;gap:2px;width:70%;height:70%;">
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div></div>
+                                        <span class="tool-label">2 Foto</span></div>
+                                <div class="tool-item" onclick="selectLayout('3', this)" style="background:white;">
+                                    <div style="display:flex;flex-direction:column;gap:2px;width:70%;height:70%;">
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                    </div><span class="tool-label">3 Foto</span></div>
+                                <div class="tool-item selected" onclick="selectLayout('4-grid', this)" style="background:white;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:70%;height:70%;">
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                    </div><span class="tool-label">4 (Kotak)</span></div>
+                                <div class="tool-item" onclick="selectLayout('4-vertical', this)" style="background:white;">
+                                    <div style="display:flex;flex-direction:column;gap:2px;width:70%;height:70%;">
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="flex:1;border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                    </div><span class="tool-label">4 (Rak)</span></div>
+                                <div class="tool-item" onclick="selectLayout('5', this)" style="background:white;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:70%;height:70%;">
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;grid-column:span 2;"></div></div>
+                                        <span class="tool-label">5 Foto</span></div>
+                                <div class="tool-item" onclick="selectLayout('6', this)" style="background:white;">
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:70%;height:70%;">
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div>
+                                        <div style="border:2px solid #FF8FAB;border-radius:4px;"></div></div>
+                                        <span class="tool-label">6 Foto</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="page" id="page-result"><div class="result-page">
+                <div class="floating-decor" style="top:5%;left:10%">
+                    <svg width="35" height="35" viewBox="0 0 30 30">
+                        <polygon points="15,2 18,11 28,11 20,17 23,27 15,21 7,27 10,17 2,11 12,11" fill="#FFD700" opacity=".5"/>
+                    </svg></div>
+                <h2 class="result-title">Foto Kamu Siap!</h2><p class="result-subtitle">Momen lucu berhasil ditangkap</p>
+                <div class="result-photo-wrapper"><div class="result-decor bow"><svg width="50" height="40" viewBox="0 0 100 80">
+                    <circle cx="50" cy="35" r="12" fill="#FF8FAB"/><path d="M38,35 L15,15 L30,40 Z" fill="#FF8FAB"/>
+                    <path d="M62,35 L85,15 L70,40 Z" fill="#FF8FAB"/><circle cx="50" cy="35" r="6" fill="#FFD1DC"/></svg></div>
+                    <div class="result-photo-frame"><canvas id="resultCanvas"></canvas></div></div>
+                <div class="result-actions"><button class="btn-download" onclick="downloadPhoto()"><i class="fas fa-download"></i> Download Foto</button>
+                    <button class="btn-retake" onclick="retakePhoto()"><i class="fas fa-redo"></i> Foto Ulangi</button></div>
+                <div class="result-info"><h4><i class="fas fa-info-circle"></i> Detail Foto</h4><div class="result-info-item"><i class="fas fa-calendar"></i>
+                    <span id="resultDate">-</span></div><div class="result-info-item"><i class="fas fa-clock"></i><span id="resultTime">-</span></div>
+                    <div class="result-info-item"><i class="fas fa-palette"></i><span id="resultFilter">Normal</span></div><div class="result-info-item">
+                        <i class="fas fa-border-all"></i><span id="resultFrame">None</span></div><div class="result-info-item"><i class="fas fa-th"></i>
+                            <span id="resultLayout">1</span></div></div>
+            </div></section>
+
+            <section class="page" id="page-gallery"><div class="gallery-page">
+                <div class="gallery-header"><h2>My Gallery</h2><span class="photo-count" id="photoCount">Total 0 foto</span></div>
+                <div class="gallery-grid" id="galleryGrid"></div>
+                <div class="gallery-footer"><span class="total-info" id="galleryTotalInfo">Total 0 foto</span><div class="pagination"><button class="active">1</button>
+                </div><button class="btn-select-photos" onclick="downloadSelectedPhotos()">
+                    <i class="fas fa-download" style="margin-right:6px"></i> Download Semua</button></div>
+            </div></section>
+        </main>
+    </div>
+
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMessage">Berhasil!</span></div>
+    <div class="modal-overlay" id="modalOverlay"><div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">
+            <i class="fas fa-times"></i></button>
+            <h3 style="font-family:'Pacifico',cursive;color:var(--pink-dark);margin-bottom:8px" id="modalTitle">Foto</h3>
+            <div class="modal-image"><canvas id="modalCanvas"></canvas></div>
+            <div class="modal-info"><span><i class="fas fa-calendar"></i> <span id="modalDate">-</span></span>
+                <span><i class="fas fa-clock"></i> <span id="modalTime">-</span></span>
+                <span><i class="fas fa-palette"></i> <span id="modalFilter">Normal</span></span></div>
+                <div class="modal-actions"><button class="btn-download" onclick="downloadModalPhoto()" style="font-size:13px;padding:10px 20px">
+                    <i class="fas fa-download"></i> Download</button>
+                    <button class="btn-retake" onclick="deletePhoto()" style="font-size:13px;padding:10px 20px;color:#e74c3c;border-color:#e74c3c">
+                        <i class="fas fa-trash"></i> Hapus</button></div></div></div>
+
+    <!--Java Script-->
+    <script src="Japa Sekript.js">
+    </script>
+</body>
+</html>
